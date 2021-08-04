@@ -1,5 +1,9 @@
 package socketManger;
 
+//https://github.com/TooTallNate/Java-WebSocket/wiki#server-example
+//https://github.com/TooTallNate/Java-WebSocket
+
+import MessageManger.MsgInter;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
@@ -17,7 +21,6 @@ public class SocketManger extends WebSocketServer {
         conn.send("Welcome to the server!"); //This method sends a message to the new client
         broadcast( "new connection: " + handshake.getResourceDescriptor() ); //This method sends a message to all clients connected
         System.out.println("new connection to " + conn.getRemoteSocketAddress());
-
     }
 
     @Override
@@ -28,6 +31,8 @@ public class SocketManger extends WebSocketServer {
     @Override
     public void onMessage(WebSocket conn, String message) {
         System.out.println("received message from "	+ conn.getRemoteSocketAddress() + ": " + message);
+
+        new MsgInter().msgi(message);
     }
 
     @Override
