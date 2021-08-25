@@ -65,7 +65,7 @@ public class InitDB {
             System.out.println("Attempting to create user table.");
             Connection con = DriverManager.getConnection("jdbc:mysql:// " + host + " : " + port + "/ " + db + " ", username, password);
             Statement stmt = con.createStatement();
-            boolean rs = stmt.execute("CREATE TABLE `users` (" + "  `id` INT NOT NULL AUTO_INCREMENT," + "  `username` VARCHAR(45) NOT NULL," + "  `password` VARCHAR(45) NOT NULL," + "  `project` VARCHAR(200) NULL," + "  `admin` TINYINT NOT NULL," + "  PRIMARY KEY (`id`));");
+            boolean rs = stmt.execute("CREATE TABLE `users` (" + "  `id` INT NOT NULL AUTO_INCREMENT," + "  `username` VARCHAR(45) NOT NULL," + "  `password` VARCHAR(45) NOT NULL," + "  `project` VARCHAR(200) NULL," + "  `admin` TINYINT NOT NULL," + "  `organisation` VARCHAR(200) NOT NULL,"  + "  PRIMARY KEY (`id`));");
             con.close();
 
             if(rs)
