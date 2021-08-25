@@ -65,7 +65,7 @@ public class InitDB {
             System.out.println("Attempting to create user table.");
             Connection con = DriverManager.getConnection("jdbc:mysql:// " + host + " : " + port + "/ " + db + " ", username, password);
             Statement stmt = con.createStatement();
-            boolean rs = stmt.execute("CREATE TABLE `users` (" + "  `id` INT NOT NULL AUTO_INCREMENT," + "  `username` VARCHAR(45) NOT NULL," + "  `password` VARCHAR(45) NOT NULL," + "  `projectdir` VARCHAR(200) NULL," + "  `admin` TINYINT NOT NULL," + "  PRIMARY KEY (`id`));");
+            boolean rs = stmt.execute("CREATE TABLE `users` (" + "  `id` INT NOT NULL AUTO_INCREMENT," + "  `username` VARCHAR(45) NOT NULL," + "  `password` VARCHAR(45) NOT NULL," + "  `project` VARCHAR(200) NULL," + "  `admin` TINYINT NOT NULL," + "  PRIMARY KEY (`id`));");
             con.close();
 
             if(rs)
@@ -90,6 +90,25 @@ public class InitDB {
             if(rs)
                 System.out.println("Active Table Was Created.");
             else System.out.println("Active Table Already Exists.");
+
+        } catch (Exception e)
+        {
+            System.out.println("Error Creating Database.");
+            System.out.println("Error in sql: " + e.getMessage());
+        }
+
+
+        // Create the ProjectINFO table for active users for ECH.
+        try {
+
+            Connection con = DriverManager.getConnection("jdbc:mysql:// " + host + " : " + port + "/ " + db + " ", username, password);
+            Statement stmt = con.createStatement();
+            boolean rs = stmt.execute("CREATE TABLE `ech`.`projectinfo` (" + "  `idprojectinfo` INT NOT NULL AUTO_INCREMENT," + "  `pname` VARCHAR(45) NOT NULL," + "  `pdatecreated` VARCHAR(45) NULL," + "  `pdateupdated` VARCHAR(45) NULL," + "  `pdormantdir` VARCHAR(45) NULL," + "  `pactivedir` VARCHAR(45) NULL," + "   `isDisabled` TINYINT NULL, " + "  PRIMARY KEY (`idprojectinfo`));");
+            con.close();
+
+            if(rs)
+                System.out.println("ProjectINFO Table Was Created.");
+            else System.out.println("ProjectINFO Already Exists.");
 
         } catch (Exception e)
         {
