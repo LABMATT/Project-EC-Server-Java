@@ -26,6 +26,8 @@ public class SocketManger extends WebSocketServer {
     // When a fresh socket is opened such as a page refresh or user join.
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
+
+        /*
         conn.send("Welcome to the server!"); //This method sends a message to the new client
         //broadcast( "new connection: " + handshake.getResourceDescriptor() ); //This method sends a message to all clients connected
         System.out.println("new connection to " + conn.getRemoteSocketAddress());
@@ -36,18 +38,14 @@ public class SocketManger extends WebSocketServer {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+         */
     }
 
     // When a socket disconnets.
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-        System.out.println("closed " + conn.getRemoteSocketAddress() + " with exit code " + code + " additional info: " + reason);
 
-        try {
-            System.out.println(pStatment.updateQuary("DELETE FROM active WHERE (`wsocketID` = '"+conn.getRemoteSocketAddress()+"');"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

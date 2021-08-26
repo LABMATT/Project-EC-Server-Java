@@ -1,4 +1,4 @@
-package DoludeManger;
+package ECHManger;
 
 public class HostSession {
 

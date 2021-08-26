@@ -1,8 +1,6 @@
 package MessageManger;
 
-import DoludeManger.HostSession;
-import DoludeManger.JoinSession;
-import DoludeManger.RegisterSession;
+import ECHManger.*;
 import org.java_websocket.WebSocket;
 
 public class Message implements Runnable {
@@ -31,11 +29,20 @@ public class Message implements Runnable {
             String sufix = message.substring(prefixpos + 1);
 
             try {
-                prefix = new Sanitizer().sanitize(prefix, 20);
-                sufix = new Sanitizer().sanitize(sufix, 20);
+                if(prefix.length() == (message.length() - 1))
+                {
+                    System.out.println("prefix only");
+                    prefix = new Sanitizer().sanitize(prefix, 20);
+                } else
+                {
+                    prefix = new Sanitizer().sanitize(prefix, 20);
+                    sufix = new Sanitizer().sanitize(sufix, 20);
+                }
 
                 switch (prefix) {
-                    case "register" -> new RegisterSession();
+                    case "rego"   -> new RegisterSession(sufix, connection);
+                    case "logout" -> new Logout(connection);
+                    case "name"   -> new GetName(connection);
                     case "host" -> new HostSession();
                     case "join" -> new JoinSession();
                     default -> connection.send(prefix + " invalid.");

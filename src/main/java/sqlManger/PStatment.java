@@ -7,7 +7,7 @@ public class PStatment {
     // Providing a statement, connects to server then returns the result and closes the connection.
     public ResultSet getQury(String statement) throws SQLException {
 
-        final String db = "dolude";
+        final String db = "ech";
         final String host = "localhost";
         final String username = "root";
         final String password = "";
@@ -18,15 +18,19 @@ public class PStatment {
 
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(statement);
-        con.close();
+        //con.close();
 
         return rs;
+    }
+
+    public void close(Connection c) throws SQLException {
+        c.close();
     }
 
     // Providing a statement, connects to server then returns the result and closes the connection.
     public boolean updateQuary(String statement) throws SQLException {
 
-        final String db = "dolude";
+        final String db = "ech";
         final String host = "localhost";
         final String username = "root";
         final String password = "";
